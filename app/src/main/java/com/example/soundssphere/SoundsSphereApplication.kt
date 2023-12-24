@@ -6,6 +6,5 @@ import dagger.hilt.android.HiltAndroidApp
 @HiltAndroidApp
 class SoundsSphereApplication : Application()
 {
-    private val accessToken : String = ""
-    private val expiresAt : Int =0
+
 }

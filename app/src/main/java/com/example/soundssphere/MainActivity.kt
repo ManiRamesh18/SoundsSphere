@@ -12,11 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.soundssphere.navigation.SoundNavigation
+import com.example.soundssphere.ui.HomeScreenViewModel
 import com.example.soundssphere.ui.SplashViewModel
 import com.example.soundssphere.ui.theme.SoundsSphereTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val viewModel: SplashViewModel by viewModels()
+
+    private val homeScreenViewModel : HomeScreenViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         val splash = installSplashScreen()
         super.onCreate(savedInstanceState)
@@ -25,7 +31,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             SoundsSphereTheme {
-
+                SoundNavigation(homeScreenViewModel)
             }
         }
     }

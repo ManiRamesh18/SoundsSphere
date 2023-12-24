@@ -1,8 +1,12 @@
 package com.example.soundssphere.di
 
 import com.example.soundssphere.Constants
+import com.example.soundssphere.data.network.NetworkInterceptor
 import com.example.soundssphere.data.network.RemoteApiService
+import com.example.soundssphere.data.network.token.TokenRepository
+import com.example.soundssphere.data.repo.SoundsSphereRepositoryImpl
 import com.example.soundssphere.data.tokenManager.TokenRepositoryImpl
+import com.example.soundssphere.ui.HomeScreenViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,6 +24,7 @@ object Module
     fun provideOkHttpClient():OkHttpClient
     {
         return OkHttpClient().newBuilder()
+            .addInterceptor(NetworkInterceptor())
             .build()
     }
 
@@ -28,6 +33,7 @@ object Module
     {
         return Retrofit.Builder()
             .client(okHttpClient)
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -42,5 +48,17 @@ object Module
     fun provideTokenRepoImpl(remoteApiService: RemoteApiService): TokenRepositoryImpl
     {
         return TokenRepositoryImpl(remoteApiService)
+    }
+
+    @Provides
+    fun provideSoundsSphereRepoImpl(remoteApiService: RemoteApiService, tokenRepository: TokenRepository): SoundsSphereRepositoryImpl
+    {
+        return SoundsSphereRepositoryImpl(remoteApiService, tokenRepository)
+    }
+
+    @Provides
+    fun provideHomeScreenViewModel(soundsSphereRepositoryImpl: SoundsSphereRepositoryImpl) : HomeScreenViewModel
+    {
+        return HomeScreenViewModel(soundsSphereRepositoryImpl)
     }
 }
