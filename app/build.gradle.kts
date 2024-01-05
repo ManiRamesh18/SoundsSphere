@@ -106,4 +106,11 @@ dependencies {
     implementation ("androidx.compose.ui:ui:1.2.0-beta02")
     implementation ("androidx.compose.material:material:1.2.0-beta02")
 
+    implementation ("androidx.media3:media3-exoplayer:1.2.0")
+    implementation ("androidx.media3:media3-exoplayer-dash:1.2.0")
+    implementation ("androidx.media3:media3-ui:1.2.0")
+
+    implementation ("com.airbnb.android:lottie-compose:5.2.0")
+
+
 }
