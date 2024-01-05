@@ -6,4 +6,8 @@ import com.example.soundssphere.domain.SearchResult
 interface SoundsSphereRepository
 {
     suspend fun getNewReleaseList() : FetchedResource<List<SearchResult.NewReleaseAlbumResult>, String>
+
+    suspend fun getFeaturedPlaylist() : FetchedResource<List<SearchResult.FeaturePlayList>, String>
+
+    suspend fun getCategoriesPlayList() : FetchedResource<List<SearchResult.Categories>, String>
 }
